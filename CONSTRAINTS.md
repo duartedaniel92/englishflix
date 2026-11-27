@@ -12,8 +12,9 @@ Regra de ouro (prompt §11.3): **nunca afrouxar este arquivo para uma mudança p
 | Sem `eslint-disable` (comentário não desliga regra) | ESLint `linterOptions.noInlineConfig` | `npm run lint`, CI |
 | Sem `any` | ESLint `@typescript-eslint/no-explicit-any` | `npm run lint`, CI |
 | Sem `catch` vazio, sem `console.log`, sem `TODO`/`FIXME` no código | ESLint `no-empty`, `no-console`, `no-warning-comments` | `npm run lint`, CI |
-| Sem teste pulado ou focado (`.skip`, `.only`) | ESLint `no-restricted-syntax` nos arquivos de teste; Playwright `forbidOnly` no CI | `npm run lint`, CI |
+| Sem teste pulado, focado ou invertido (`.skip`, `.skipIf`, `.runIf`, `.only`, `.todo`, `.fixme`, `.fail`, `.fails`) | ESLint `no-restricted-syntax` nos arquivos de teste; Playwright `forbidOnly` no CI | `npm run lint`, CI |
 | Sem segredo no repositório | gitleaks (`--redact`: o relatório mostra a regra e o local, nunca o valor) | pre-commit, CI |
+| Sem chave secreta em variável `NEXT_PUBLIC_*` (iria para o JavaScript do navegador) | `assertNoPublicSecrets()` chamado no `next.config.ts` | `next build`, `next dev` |
 
 ## Com números (bloqueiam o merge)
 

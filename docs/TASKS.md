@@ -27,7 +27,7 @@ Esforço P/M/G não é prazo. Concluir só com evidência de aceite. Plano detal
 | T1 | Esqueleto Next.js (TS estrito, scripts, Node fixado, placeholder PT-BR) | M | T0 | Concluída | 27/11: `lint`, `typecheck` e `build` limpos; piso do ESLint testado com violações de propósito |
 | T2 | Documentação (6 docs, `CONSTRAINTS.md`, ADR 0001, README, AGENTS/CLAUDE) | M | T0 | Em revisão | Aguarda leitura do autor |
 | T3 | shadcn/ui + tema escuro | P | T1 | A fazer | Build limpo, `<html class="dark">` |
-| T4 | Vitest (`lib/env.ts`) + Playwright (fumaça em 360 px) | M | T3 | A fazer | `npm test` e `npm run test:e2e` verdes |
+| T4 | Vitest (`lib/env.ts`) + Playwright (fumaça em 360 px) | M | T1 | Concluída | 27/11: 8 testes unitários; E2E em 360 px contra o build; build falha com segredo em `NEXT_PUBLIC_*` (ambiente e `.env.local`) e passa sem ele |
 | T5 | Supabase local (CLI como devDependency) | P | T1 + Docker instalado | A fazer | `supabase start` e `status` ok |
 | T6 | CI (quality + secrets), Dependabot, pre-commit com gitleaks | M | T4 | A fazer | Hook bloqueia token falso |
 | T7 | Repositório público no GitHub, PR, preview na Vercel | P | T6 + ok do autor | A fazer | `gh pr checks` verde, preview 200 |

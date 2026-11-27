@@ -36,7 +36,7 @@ flowchart LR
 
 ## Pastas e responsabilidades
 
-```
+```text
 app/            rotas (App Router); Server Components por padrão
 components/     UI (components/ui = shadcn)
 lib/            domínio, validação (Zod), clientes Supabase, segurança
@@ -65,7 +65,7 @@ Contrato de erro único: `{ code, message }`, sem vazar detalhe interno. Listas 
 ## Segurança e integrações
 
 - Papel de admin em `app_metadata` (nunca em `user_metadata`); `/admin` checado no servidor **e** por RLS.
-- Chave secreta do Supabase só no servidor; `lib/env.ts` recusa chave secreta em variável `NEXT_PUBLIC_*` (Fase 0).
+- Chave secreta do Supabase só no servidor. O `next.config.ts` chama `assertNoPublicSecrets()` (`lib/env.ts`): o build e o dev falham se alguma variável `NEXT_PUBLIC_*` guardar chave secreta, antes de o Next copiar o valor para o JavaScript do navegador (Fase 0).
 - Headers (CSP com nonce, HSTS, `frame-ancestors 'none'` etc.) na Fase 2. Trade-off a decidir em ADR: nonce obriga renderização dinâmica, o que conflita com cache das listas públicas.
 - YouTube: só o player oficial (`youtube-nocookie.com`), com crédito ao canal; nunca baixar nem esconder controles.
 

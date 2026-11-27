@@ -33,7 +33,8 @@ const eslintConfig = defineConfig([
       "no-restricted-syntax": [
         "error",
         {
-          selector: "CallExpression[callee.property.name=/^(skip|only|todo|fixme)$/]",
+          // skipIf/runIf pulam por condição; fail/fails passam quando o teste falha.
+          selector: "CallExpression[callee.property.name=/^(skip|skipIf|runIf|only|todo|fixme|fail|fails)$/]",
           message: "Teste pulado ou focado não entra no repositório (CONSTRAINTS.md).",
         },
       ],

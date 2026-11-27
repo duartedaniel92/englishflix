@@ -45,3 +45,7 @@ next-env.d.ts
 
 # capturas de material de terceiros (referência local, fora do Git)
 /docs/estrutura-sugerida/
+
+# saídas do Playwright
+/test-results/
+/playwright-report/

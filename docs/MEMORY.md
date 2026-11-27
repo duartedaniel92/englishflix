@@ -51,6 +51,8 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 - 27/11/2026: o primeiro `npm install` (358 pacotes) levou 31 minutos. Juntar dependências num único install.
 - 27/11/2026: o `create-next-app` 16.4.6 com `--yes` liga `cacheComponents` e `partialPrefetching` por padrão e usa `@tailwindcss/turbopack` em vez de PostCSS.
 - 27/11/2026: a doc instalada (`content-security-policy.md`) confirma que nonce exige renderização dinâmica e que PPR é incompatível com CSP de nonce; cita SRI (experimental) como alternativa que mantém páginas estáticas, a avaliar no ADR da Fase 2. A doc chama o modelo sem Cache Components de "Previous Model": suportado, mas não é a direção do framework. `partialPrefetching` só funciona com `cacheComponents`.
+- 27/11/2026: Vitest 5.1.2 no Windows não roda nenhum teste se o terminal abrir em `c:` minúsculo (o VS Code abre assim): o caminho vira `c:` de um lado e `C:` do outro, e o Vitest se carrega duas vezes ("failed to find the current suite"). `resolve.preserveSymlinks` **não** resolveu. Solução: `npm test` chama `scripts/vitest.mjs`, que roda o Vitest a partir de `realpathSync.native` (caminho canônico). Usar `npm test`, não `npx vitest`, nesses terminais.
+- 27/11/2026: revisão (ponytail-review) das mudanças da T4/T6: a trava de segredo passou do runtime para o build; regra de teste pulado ampliada (`skipIf`, `runIf`, `fail`, `fails`); scripts faltantes adicionados; linhas redundantes removidas.
 - Ruflo: pacote oficial `ruflo` (ruvnet), 3.80.11. Ainda não rodou neste projeto.
 
 ## Cuidados
