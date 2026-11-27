@@ -30,6 +30,8 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 - Próximo passo: terminar a T1 (instalar dependências, desligar `cacheComponents`, ajustes) e a T2; depois T3 → T7.
 - Autor: instalar Docker Desktop e gitleaks (ver bloqueios em [TASKS.md](TASKS.md)).
 - Abrir na Fase 2: ADR de CSP (nonce) e direção visual (`impeccable`).
+- Fase 2: o `supabase/config.jsonc` vem com auth fraco por padrão (`minimum_password_length: 6`, `enable_confirmations: false`, `site_url` em `127.0.0.1:3000`). O prompt exige verificação de e-mail e senha forte: ajustar junto com o fluxo de cadastro.
+- A CLI do Supabase 3.4.0 usa `config.jsonc` (não mais `config.toml`) e oferece uma pilha local experimental (`SUPABASE_EXPERIMENTAL_STACK=1`); ficamos na pilha estável.
 
 ## Skills: nomes do prompt → nomes reais
 
