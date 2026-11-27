@@ -16,6 +16,7 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 | 27/11/2026 | Commits livres na branch da fase; push, repositório e deploy só com ok | O prompt pede commits atômicos; a regra comum pede autorização | Exceção em [RULES.md](RULES.md) | Autor |
 | 27/11/2026 | Repositório público no GitHub | Portfólio; Actions ilimitado em repositório público | gitleaks obrigatório | Autor |
 | 27/11/2026 | `cacheComponents` desligado | CSP com nonce exige renderização na hora, o que anula a casca estática | Modelo clássico; cache com `revalidate` | [ADR 0001](adr/0001-stack-e-hospedagem.md) |
+| 27/11/2026 | ESLint fica no 9 (o npm avisa que não tem mais suporte) | `eslint-plugin-react` 7.37.5, `eslint-plugin-jsx-a11y` 6.10.2 e `eslint-plugin-import` 2.32.0 (últimas versões, usadas pelo `eslint-config-next` 16.4.6) só aceitam até o ESLint 9 | Ferramenta só de desenvolvimento; `npm audit` limpo em 27/11. Reavaliar quando o Dependabot trouxer suporte ao 10 | npm registry, 27/11/2026 |
 | 27/11/2026 | Sentry fora do MVP | Decisão fechada no prompt | Exceção à definição de pronto | [RULES.md](RULES.md) |
 | 27/11/2026 | Capturas da `estrutura-sugerida/` fora do Git | Material de terceiros | Mapeamento no PRD | [PRD.md](PRD.md) |
 
