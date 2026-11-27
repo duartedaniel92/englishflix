@@ -1,0 +1,187 @@
+##### type=security path=lib
+
+Code Analysis
+--------------------------------------------------
++-- Security Summary --+
+| Files Scanned: 3     |
+| Files with Issues: 0 |
+| Total Issues: 0      |
++----------------------+
+
+[OK] No common security patterns detected
+##### type=security path=app
+
+Code Analysis
+--------------------------------------------------
++-- Security Summary --+
+| Files Scanned: 2     |
+| Files with Issues: 0 |
+| Total Issues: 0      |
++----------------------+
+
+[OK] No common security patterns detected
+##### type=security path=scripts
+
+Code Analysis
+--------------------------------------------------
++-- Security Summary --+
+| Files Scanned: 1     |
+| Files with Issues: 0 |
+| Total Issues: 0      |
++----------------------+
+
+[OK] No common security patterns detected
+##### type=security path=e2e
+
+Code Analysis
+--------------------------------------------------
++-- Security Summary --+
+| Files Scanned: 1     |
+| Files with Issues: 0 |
+| Total Issues: 0      |
++----------------------+
+
+[OK] No common security patterns detected
+##### type=quality path=lib
+
+Code Analysis
+--------------------------------------------------
++--- Quality Summary ---+
+| Files: 3              |
+| Lines of Code: 116    |
+| Avg File Size: 39 LOC |
+| TODO/FIXME: 0         |
+| Functions: 6          |
+| Imports: 3            |
++-----------------------+
+
+Largest Files
+------------------------------------------------------------
++-------------+-----+-----+-------+
+| File        | LOC | Fns | TODOs |
++-------------+-----+-----+-------+
+| env.test.ts |  65 |   2 |     0 |
+| env.ts      |  50 |   4 |     0 |
+| utils.ts    |   1 |   0 |     0 |
++-------------+-----+-----+-------+
+##### type=quality path=app
+
+Code Analysis
+--------------------------------------------------
++--- Quality Summary ---+
+| Files: 2              |
+| Lines of Code: 34     |
+| Avg File Size: 17 LOC |
+| TODO/FIXME: 0         |
+| Functions: 2          |
+| Imports: 3            |
++-----------------------+
+
+Largest Files
+------------------------------------------------------------
++------------+-----+-----+-------+
+| File       | LOC | Fns | TODOs |
++------------+-----+-----+-------+
+| layout.tsx |  25 |   1 |     0 |
+| page.tsx   |   9 |   1 |     0 |
++------------+-----+-----+-------+
+##### type=quality path=scripts
+
+Code Analysis
+--------------------------------------------------
++-- Quality Summary ---+
+| Files: 1             |
+| Lines of Code: 8     |
+| Avg File Size: 8 LOC |
+| TODO/FIXME: 0        |
+| Functions: 0         |
+| Imports: 2           |
++----------------------+
+
+Largest Files
+------------------------------------------------------------
++------------+-----+-----+-------+
+| File       | LOC | Fns | TODOs |
++------------+-----+-----+-------+
+| vitest.mjs |   8 |   0 |     0 |
++------------+-----+-----+-------+
+##### type=quality path=e2e
+
+Code Analysis
+--------------------------------------------------
++--- Quality Summary ---+
+| Files: 1              |
+| Lines of Code: 10     |
+| Avg File Size: 10 LOC |
+| TODO/FIXME: 0         |
+| Functions: 0          |
+| Imports: 1            |
++-----------------------+
+
+Largest Files
+------------------------------------------------------------
++--------------+-----+-----+-------+
+| File         | LOC | Fns | TODOs |
++--------------+-----+-----+-------+
+| home.spec.ts |  10 |   0 |     0 |
++--------------+-----+-----+-------+
+##### type=complexity path=lib
+
+Code Analysis
+--------------------------------------------------
++---------- Complexity Summary -----------+
+| Files: 3                                |
+| Total Functions: 6                      |
+| Avg Functions/File: 2.0                 |
+| Deepest Nesting: 3 levels (env.test.ts) |
+| Longest File: 65 LOC (env.test.ts)      |
++-----------------------------------------+
+
+High Complexity Files (nesting > 5)
+------------------------------------------------------------
+[OK] No files with excessive nesting detected
+##### type=complexity path=app
+
+Code Analysis
+--------------------------------------------------
++--------- Complexity Summary ---------+
+| Files: 2                             |
+| Total Functions: 2                   |
+| Avg Functions/File: 1.0              |
+| Deepest Nesting: 1 levels (page.tsx) |
+| Longest File: 25 LOC (layout.tsx)    |
++--------------------------------------+
+
+High Complexity Files (nesting > 5)
+------------------------------------------------------------
+[OK] No files with excessive nesting detected
+##### type=complexity path=scripts
+
+Code Analysis
+--------------------------------------------------
++---------- Complexity Summary ----------+
+| Files: 1                               |
+| Total Functions: 0                     |
+| Avg Functions/File: 0.0                |
+| Deepest Nesting: 1 levels (vitest.mjs) |
+| Longest File: 8 LOC (vitest.mjs)       |
++----------------------------------------+
+
+High Complexity Files (nesting > 5)
+------------------------------------------------------------
+[OK] No files with excessive nesting detected
+##### type=complexity path=e2e
+
+Code Analysis
+--------------------------------------------------
++----------- Complexity Summary -----------+
+| Files: 1                                 |
+| Total Functions: 0                       |
+| Avg Functions/File: 0.0                  |
+| Deepest Nesting: 1 levels (home.spec.ts) |
+| Longest File: 10 LOC (home.spec.ts)      |
++------------------------------------------+
+
+High Complexity Files (nesting > 5)
+------------------------------------------------------------
+[OK] No files with excessive nesting detected
