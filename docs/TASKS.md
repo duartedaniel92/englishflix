@@ -26,7 +26,7 @@ Esforço P/M/G não é prazo. Concluir só com evidência de aceite. Plano detal
 | T0 | Repositório, branch da fase, `docs/`, `.gitattributes` | P | — | Concluída | Commits `88f8626`, `1361b26` |
 | T1 | Esqueleto Next.js (TS estrito, scripts, Node fixado, placeholder PT-BR) | M | T0 | Concluída | 27/11: `lint`, `typecheck` e `build` limpos; piso do ESLint testado com violações de propósito |
 | T2 | Documentação (6 docs, `CONSTRAINTS.md`, ADR 0001, README, AGENTS/CLAUDE) | M | T0 | Em revisão | Aguarda leitura do autor |
-| T3 | shadcn/ui + tema escuro | P | T1 | A fazer | Build limpo, `<html class="dark">` |
+| T3 | shadcn/ui + tema escuro | P | T1 | Concluída | 27/11: `check`, build e E2E verdes; no navegador, fundo escuro, texto claro e fonte Geist aplicada em 360 px |
 | T4 | Vitest (`lib/env.ts`) + Playwright (fumaça em 360 px) | M | T1 | Concluída | 27/11: 8 testes unitários; E2E em 360 px contra o build; build falha com segredo em `NEXT_PUBLIC_*` (ambiente e `.env.local`) e passa sem ele |
 | T5 | Supabase local (CLI como devDependency) | P | T1 + Docker instalado | Bloqueada | 27/11: `supabase init` feito (CLI 3.4.0, `supabase/config.jsonc`). Falta `supabase start` e `status`, que esperam o Docker |
 | T6 | CI (quality + secrets), Dependabot, pre-commit com gitleaks | M | T4 | A fazer | Hook bloqueia token falso |

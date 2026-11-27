@@ -17,6 +17,7 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 | 27/11/2026 | Repositório público no GitHub | Portfólio; Actions ilimitado em repositório público | gitleaks obrigatório | Autor |
 | 27/11/2026 | `cacheComponents` desligado | CSP com nonce exige renderização na hora, o que anula a casca estática | Modelo clássico; cache com `revalidate` | [ADR 0001](adr/0001-stack-e-hospedagem.md) |
 | 27/11/2026 | ESLint fica no 9 (o npm avisa que não tem mais suporte) | `eslint-plugin-react` 7.37.5, `eslint-plugin-jsx-a11y` 6.10.2 e `eslint-plugin-import` 2.32.0 (últimas versões, usadas pelo `eslint-config-next` 16.4.6) só aceitam até o ESLint 9 | Ferramenta só de desenvolvimento; `npm audit` limpo em 27/11. Reavaliar quando o Dependabot trouxer suporte ao 10 | npm registry, 27/11/2026 |
+| 27/11/2026 | shadcn/ui com o preset padrão do CLI 4 (`base-nova`: Base UI, cor neutra) | Nada depende da escolha ainda; o visual será redesenhado na direção da Fase 2 | Componentes entram com `npx shadcn add <nome>` quando forem usados, e o CLI instala as dependências de cada um (o botão gerado no init foi removido) | `components.json` |
 | 27/11/2026 | Sentry fora do MVP | Decisão fechada no prompt | Exceção à definição de pronto | [RULES.md](RULES.md) |
 | 27/11/2026 | Capturas da `estrutura-sugerida/` fora do Git | Material de terceiros | Mapeamento no PRD | [PRD.md](PRD.md) |
 
@@ -56,6 +57,7 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 - 27/11/2026: a doc instalada (`content-security-policy.md`) confirma que nonce exige renderização dinâmica e que PPR é incompatível com CSP de nonce; cita SRI (experimental) como alternativa que mantém páginas estáticas, a avaliar no ADR da Fase 2. A doc chama o modelo sem Cache Components de "Previous Model": suportado, mas não é a direção do framework. `partialPrefetching` só funciona com `cacheComponents`.
 - 27/11/2026: Vitest 5.1.2 no Windows não roda nenhum teste se o terminal abrir em `c:` minúsculo (o VS Code abre assim): o caminho vira `c:` de um lado e `C:` do outro, e o Vitest se carrega duas vezes ("failed to find the current suite"). `resolve.preserveSymlinks` **não** resolveu. Solução: `npm test` chama `scripts/vitest.mjs`, que roda o Vitest a partir de `realpathSync.native` (caminho canônico). Usar `npm test`, não `npx vitest`, nesses terminais.
 - 27/11/2026: revisão (ponytail-review) das mudanças da T4/T6: a trava de segredo passou do runtime para o build; regra de teste pulado ampliada (`skipIf`, `runIf`, `fail`, `fails`); scripts faltantes adicionados; linhas redundantes removidas.
+- 27/11/2026: o `shadcn init` (CLI 4.23) troca `clsx` + `tailwind-merge` pelo pacote `cn` (oficial, do autor do shadcn) e espera a fonte em `--font-sans`. O layout do `create-next-app` usava `--font-geist-sans`, e a fonte caía no padrão do navegador até a variável ser renomeada. As dependências instaladas por antecipação e não usadas (`clsx`, `tailwind-merge`, `lucide-react`) foram removidas. Lição: deixar o CLI instalar o que ele usa.
 - Ruflo: pacote oficial `ruflo` (ruvnet), 3.80.11. Ainda não rodou neste projeto.
 
 ## Cuidados

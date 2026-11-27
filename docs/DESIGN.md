@@ -22,7 +22,8 @@ A definir com o autor (skill `impeccable` / `frontend-design`) antes da Fase 2. 
 
 ## Componentes e fluxos
 
-- shadcn/ui como base; componente entra no projeto só quando for usado.
+- shadcn/ui (preset `base-nova`, sobre Base UI) como base; componente entra no projeto só quando for usado, com `npx shadcn add <nome>`.
+- Fonte provisória: Geist (veio do `create-next-app`). A tipografia definitiva sai da direção visual da Fase 2.
 - Todo estado desenhado: carregando (skeleton), vazio (com a próxima ação), erro (com como tentar de novo), sucesso.
 - Feedback imediato: UI otimista em "Minha lista" e no progresso; o progresso nunca se perde por falha de rede.
 - **Player:** facade (miniatura + botão); o iframe do YouTube só carrega quando o aluno interage. Nunca mascarar nem sobrepor os controles do YouTube.
