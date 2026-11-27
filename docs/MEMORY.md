@@ -28,8 +28,10 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 
 ## Pendências e retomada
 
-- 27/11: o `winget install` falhou com `0x80080008` ("Object server is stopping"). O `Get-AppxPackage` dá o mesmo erro: o serviço AppX do Windows travou "desligando". Correção: reiniciar o Windows e rodar de novo `winget install Gitleaks.Gitleaks` e `winget install Docker.DockerDesktop`. Se ainda falhar: baixar o gitleaks do release oficial no GitHub (conferir o SHA-256 com o `checksums.txt`) e o Docker Desktop do site oficial.
-- Ao retomar, nesta ordem: (1) `gitleaks git --redact` no histórico inteiro, que precisa sair limpo; (2) `npm run prepare` para ativar o hook e provar que ele bloqueia um token falso; (3) `npx supabase start` e `status` (fecha a T5); (4) T7: repositório público, push, PR, CI verde, Vercel ligada ao repositório. A análise do Ruflo do checkpoint já foi feita.
+- 27/11: o `winget install` falhou com `0x80080008` porque o serviço AppX do Windows travou; resolveu reiniciando. Instalados: gitleaks 8.30.1 (pasta do pacote no PATH do usuário) e Docker Desktop 4.100.1.
+- Sessões do Claude Code abertas antes de uma instalação herdam o PATH antigo: nesses casos, chamar pelo caminho completo ou abrir uma sessão nova.
+- 27/11: histórico varrido com gitleaks (limpo); hook ativo (`npm run prepare`) e testado nos dois sentidos.
+- Ao retomar: (1) `npx supabase start` e `status`, depois de abrir o Docker Desktop (fecha a T5); (2) T7 autorizada: repositório público, push, PR, CI verde e Vercel ligada ao repositório.
 - Se o `npx ruflo` falhar com ENOENT no `package.json` de `npm-cache\_npx\<hash>`, apagar essa pasta: é um download interrompido (aconteceu quando a sessão caiu).
 - Abrir na Fase 2: ADR de CSP (nonce) e direção visual (`impeccable`).
 - Fase 2: o `supabase/config.jsonc` vem com auth fraco por padrão (`minimum_password_length: 6`, `enable_confirmations: false`, `site_url` em `127.0.0.1:3000`). O prompt exige verificação de e-mail e senha forte: ajustar junto com o fluxo de cadastro.
