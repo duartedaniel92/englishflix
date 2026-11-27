@@ -5,7 +5,7 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 ## Estado atual
 
 - Branch `chore/fase-0-fundacao`, 10 commits. T0, T1, T3 e T4 concluídas; T2 (docs) e T6 (CI/hook) em revisão; T5 bloqueada (Docker). Ver [TASKS.md](TASKS.md).
-- Nada publicado ainda (sem repositório remoto, sem Vercel). A T7 está **autorizada** pelo autor (27/11): publicar depois que o gitleaks estiver instalado e a varredura local do histórico sair limpa.
+- Publicado em 27/11: [repositório público](https://github.com/duartedaniel92/englishflix) e [PR #1](https://github.com/duartedaniel92/englishflix/pull/1) (`chore/fase-0-fundacao` → `main`), CI verde no primeiro push. A `main` só tem o commit inicial vazio até o merge do PR, que depende do ok do autor.
 
 ## Decisões
 
@@ -31,7 +31,8 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 - 27/11: o `winget install` falhou com `0x80080008` porque o serviço AppX do Windows travou; resolveu reiniciando. Instalados: gitleaks 8.30.1 (pasta do pacote no PATH do usuário) e Docker Desktop 4.100.1.
 - Sessões do Claude Code abertas antes de uma instalação herdam o PATH antigo: nesses casos, chamar pelo caminho completo ou abrir uma sessão nova.
 - 27/11: histórico varrido com gitleaks (limpo); hook ativo (`npm run prepare`) e testado nos dois sentidos.
-- Ao retomar: (1) `npx supabase start` e `status`, depois de abrir o Docker Desktop (fecha a T5); (2) T7 autorizada: repositório público, push, PR, CI verde e Vercel ligada ao repositório.
+- Ao retomar: (1) depois que o autor importar o repositório na Vercel, enviar a branch do PR para gerar o preview e checar a resposta 200 (fecha a T7); (2) `npx supabase start` e `status`, depois de abrir o Docker Desktop (fecha a T5); (3) checkpoint: o autor revisa o PR e autoriza o merge.
+- 27/11: o conector da Vercel (MCP) recebeu 403 ao criar projeto no time `team_TJPbgfxkBJ9lqXbpyUbk8O2R`. Ele serve para consultar, mas a criação foi feita pelo painel.
 - Se o `npx ruflo` falhar com ENOENT no `package.json` de `npm-cache\_npx\<hash>`, apagar essa pasta: é um download interrompido (aconteceu quando a sessão caiu).
 - Abrir na Fase 2: ADR de CSP (nonce) e direção visual (`impeccable`).
 - Fase 2: o `supabase/config.jsonc` vem com auth fraco por padrão (`minimum_password_length: 6`, `enable_confirmations: false`, `site_url` em `127.0.0.1:3000`). O prompt exige verificação de e-mail e senha forte: ajustar junto com o fluxo de cadastro.

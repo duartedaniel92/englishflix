@@ -29,14 +29,15 @@ Esforço P/M/G não é prazo. Concluir só com evidência de aceite. Plano detal
 | T3 | shadcn/ui + tema escuro | P | T1 | Concluída | 27/11: `check`, build e E2E verdes; no navegador, fundo escuro, texto claro e fonte Geist aplicada em 360 px |
 | T4 | Vitest (`lib/env.ts`) + Playwright (fumaça em 360 px) | M | T1 | Concluída | 27/11: 8 testes unitários; E2E em 360 px contra o build; build falha com segredo em `NEXT_PUBLIC_*` (ambiente e `.env.local`) e passa sem ele |
 | T5 | Supabase local (CLI como devDependency) | P | T1 + Docker instalado | Bloqueada | 27/11: `supabase init` feito (CLI 3.4.0, `supabase/config.jsonc`). Falta `supabase start` e `status`, que esperam o Docker |
-| T6 | CI (quality + secrets), Dependabot, pre-commit com gitleaks | M | T4 | Em revisão | 27/11: gitleaks 8.30.1 varreu o histórico (11 commits): limpo. O hook bloqueia um token falso (`github-pat`, valor `REDACTED`) e deixa passar commit limpo. Falta o CI verde (roda no primeiro push, T7) |
-| T7 | Repositório público no GitHub, PR, preview na Vercel | P | T6 + ok do autor | A fazer | `gh pr checks` verde, preview 200 |
+| T6 | CI (quality + secrets), Dependabot, pre-commit com gitleaks | M | T4 | Concluída | 27/11: histórico limpo no gitleaks 8.30.1; o hook bloqueia token falso (`github-pat`, valor `REDACTED`) e deixa passar commit limpo; CI verde no primeiro push (quality 1m09s, secrets 6s, todos os passos executados) |
+| T7 | Repositório público no GitHub, PR, preview na Vercel | P | T6 + ok do autor | Em andamento | 27/11: [repositório](https://github.com/duartedaniel92/englishflix) público e [PR #1](https://github.com/duartedaniel92/englishflix/pull/1) com CI verde. Vercel: o conector recebeu 403 ao criar o projeto; o autor importa pelo painel, depois um push na branch gera o preview |
 
 ## Bloqueios
 
 | Bloqueio | Quem resolve | Próximo passo |
 | --- | --- | --- |
 | Docker Desktop 4.100.1 instalado, mas o motor não está rodando (bloqueia T5) | Autor | Abrir o Docker Desktop uma vez e aceitar os termos |
+| Projeto na Vercel não criado: o conector da Vercel recebeu 403 (sem permissão para criar projeto) | Autor | Importar `duartedaniel92/englishflix` em vercel.com/new; o primeiro deploy (da `main`, ainda vazia) falha, e isso é esperado |
 
 ## Evidências e histórico
 
