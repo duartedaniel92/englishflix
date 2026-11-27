@@ -1,0 +1,6 @@
+# Bloqueia commit com segredo (CONSTRAINTS.md). --redact: o relatório mostra a regra e o local, nunca o valor.
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "pre-commit: gitleaks não está instalado. Instale com: winget install Gitleaks.Gitleaks" >&2
+  exit 1
+fi
+gitleaks git --pre-commit --staged --redact --no-banner

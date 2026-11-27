@@ -29,7 +29,7 @@ Esforço P/M/G não é prazo. Concluir só com evidência de aceite. Plano detal
 | T3 | shadcn/ui + tema escuro | P | T1 | Concluída | 27/11: `check`, build e E2E verdes; no navegador, fundo escuro, texto claro e fonte Geist aplicada em 360 px |
 | T4 | Vitest (`lib/env.ts`) + Playwright (fumaça em 360 px) | M | T1 | Concluída | 27/11: 8 testes unitários; E2E em 360 px contra o build; build falha com segredo em `NEXT_PUBLIC_*` (ambiente e `.env.local`) e passa sem ele |
 | T5 | Supabase local (CLI como devDependency) | P | T1 + Docker instalado | Bloqueada | 27/11: `supabase init` feito (CLI 3.4.0, `supabase/config.jsonc`). Falta `supabase start` e `status`, que esperam o Docker |
-| T6 | CI (quality + secrets), Dependabot, pre-commit com gitleaks | M | T4 | A fazer | Hook bloqueia token falso |
+| T6 | CI (quality + secrets), Dependabot, pre-commit com gitleaks | M | T4 | Em revisão | 27/11: CI e hook escritos, actions fixadas por SHA. Faltam: o hook bloquear um token falso (espera o gitleaks) e o CI verde (roda no primeiro push, T7) |
 | T7 | Repositório público no GitHub, PR, preview na Vercel | P | T6 + ok do autor | A fazer | `gh pr checks` verde, preview 200 |
 
 ## Bloqueios
