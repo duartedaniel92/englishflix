@@ -4,8 +4,8 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 
 ## Estado atual
 
-- Branch `chore/fase-0-fundacao`. T0 e T1 (esqueleto Next 16.4.6) concluídas; T2 (docs) em revisão. Ver [TASKS.md](TASKS.md).
-- Nada publicado ainda (sem repositório remoto, sem Vercel).
+- Branch `chore/fase-0-fundacao`, 10 commits. T0, T1, T3 e T4 concluídas; T2 (docs) e T6 (CI/hook) em revisão; T5 bloqueada (Docker). Ver [TASKS.md](TASKS.md).
+- Nada publicado ainda (sem repositório remoto, sem Vercel). A T7 está **autorizada** pelo autor (27/11): publicar depois que o gitleaks estiver instalado e a varredura local do histórico sair limpa.
 
 ## Decisões
 
@@ -28,8 +28,9 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 
 ## Pendências e retomada
 
-- Próximo passo: terminar a T1 (instalar dependências, desligar `cacheComponents`, ajustes) e a T2; depois T3 → T7.
-- Autor: instalar Docker Desktop e gitleaks (ver bloqueios em [TASKS.md](TASKS.md)).
+- 27/11: o `winget install` falhou com `0x80080008` ("Object server is stopping"). O `Get-AppxPackage` dá o mesmo erro: o serviço AppX do Windows travou "desligando". Correção: reiniciar o Windows e rodar de novo `winget install Gitleaks.Gitleaks` e `winget install Docker.DockerDesktop`. Se ainda falhar: baixar o gitleaks do release oficial no GitHub (conferir o SHA-256 com o `checksums.txt`) e o Docker Desktop do site oficial.
+- Ao retomar, nesta ordem: (1) `gitleaks git --redact` no histórico inteiro, que precisa sair limpo; (2) `npm run prepare` para ativar o hook e provar que ele bloqueia um token falso; (3) `npx supabase start` e `status` (fecha a T5); (4) T7: repositório público, push, PR, CI verde, Vercel ligada ao repositório; (5) análise do Ruflo no checkpoint.
+- Se o `npx ruflo` falhar com ENOENT no `package.json` de `npm-cache\_npx\<hash>`, apagar essa pasta: é um download interrompido (aconteceu quando a sessão caiu).
 - Abrir na Fase 2: ADR de CSP (nonce) e direção visual (`impeccable`).
 - Fase 2: o `supabase/config.jsonc` vem com auth fraco por padrão (`minimum_password_length: 6`, `enable_confirmations: false`, `site_url` em `127.0.0.1:3000`). O prompt exige verificação de e-mail e senha forte: ajustar junto com o fluxo de cadastro.
 - A CLI do Supabase 3.4.0 usa `config.jsonc` (não mais `config.toml`) e oferece uma pilha local experimental (`SUPABASE_EXPERIMENTAL_STACK=1`); ficamos na pilha estável.

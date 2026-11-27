@@ -36,8 +36,8 @@ Esforço P/M/G não é prazo. Concluir só com evidência de aceite. Plano detal
 
 | Bloqueio | Quem resolve | Próximo passo |
 | --- | --- | --- |
-| Docker Desktop não instalado (bloqueia T5) | Autor | `winget install Docker.DockerDesktop`, reiniciar e abrir o Docker Desktop uma vez |
-| gitleaks não instalado (bloqueia a verificação da T6) | Autor | `winget install Gitleaks.Gitleaks` |
+| Docker Desktop não instalado (bloqueia T5) | Autor | O winget falhou com `0x80080008` (serviço AppX travado). Reiniciar o Windows, rodar `winget install Docker.DockerDesktop` e abrir o Docker Desktop uma vez |
+| gitleaks não instalado (bloqueia a verificação da T6 e a T7) | Autor | Mesmo erro do winget. Depois de reiniciar: `winget install Gitleaks.Gitleaks`; plano B é o binário do release oficial com SHA-256 conferido |
 
 ## Evidências e histórico
 
