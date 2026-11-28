@@ -23,6 +23,9 @@ Regra de ouro (prompt §11.3): **nunca afrouxar este arquivo para uma mudança p
 | Tipos | zero erros | `npm run typecheck` | fim de tarefa, CI | TypeScript estrito (prompt §2) |
 | Lint | zero erros | `npm run lint` | fim de tarefa, CI | Carrega o piso acima |
 | Testes | todos verdes | `npm test`, `npm run test:e2e` | fim de tarefa, CI | Lógica crítica com teste primeiro (prompt §11.2) |
+| Banco | testes de banco verdes, incluindo os guardas: RLS em toda tabela do `public`, visitante sem acesso a nenhuma tabela nem função | `npm test` (projeto `db`, PGlite) | fim de tarefa, CI | O aluno não pode ler gabarito nem pular temporada por nenhuma rota (prompt §8). Guardas provados contra uma violação de propósito |
+| Migrations | aplicam no Postgres real do Supabase, sem erro de tipo | `supabase db reset` + `supabase db lint --fail-on error` | CI (job `banco`) | O PGlite é um dublê; o Postgres real tem a palavra final |
+| Advisors do Supabase | nenhum alerta de nível ERROR | `supabase db advisors --fail-on error` | CI (job `banco`; no remoto, job `deploy-banco`) | Aceite da Fase 1 (prompt §10) |
 | Build | sem erro | `npm run build` | CI | Definição de pronto do portfólio |
 | Dependências | nada de severidade `high` ou acima | `npm audit --audit-level=high` | CI | Abaixo de `high` costuma ser ruído; achado sem correção é registrado com alcance e fonte, nunca escondido |
 | Segredos | nenhum achado | `gitleaks` (staged no pre-commit, histórico no CI) | pre-commit, CI | Repositório público |
@@ -33,9 +36,7 @@ Atalho de fim de tarefa: `npm run check` (lint + typecheck + testes unitários).
 
 | Dimensão | Meta | Ferramenta | Passa a bloquear em |
 | --- | --- | --- | --- |
-| RLS | Aluno A não vê dados do B; aluno não lê gabarito; não-admin não escreve catálogo | pgTAP (`supabase test db`) | Fase 1 |
-| Banco | Advisors do Supabase sem alerta crítico | MCP do Supabase (`get_advisors`) | Fim de cada fase que mexer no banco |
-| Prova | Nenhuma rota permite ler gabarito nem pular temporada | pgTAP + E2E | Fase 7 |
+| Prova | Nenhuma rota permite ler gabarito nem pular temporada, incluindo as funções de prova | Testes de banco (PGlite) + E2E | Fase 7 |
 | Performance (mobile, 4G) | LCP ≤ 2500 ms, INP ≤ 200 ms, CLS ≤ 0,1 | Lighthouse contra o preview | Fase 9 (prompt §7) |
 | Acessibilidade | Zero violação `critical`/`serious` (WCAG 2.2 AA) | axe-core nos fluxos críticos | Fase 9 (prompt §7) |
 

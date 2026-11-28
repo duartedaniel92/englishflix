@@ -1,6 +1,6 @@
 # ADR 0002 — Supabase: projeto remoto de desenvolvimento e testes de banco no CI
 
-Status: aceito. Data: 27/11/2026. Substitui o item "Supabase local via Docker" do [ADR 0001](0001-stack-e-hospedagem.md).
+Status: aceito. Data: 27/11/2026. Substitui o item "Supabase local via Docker" do [ADR 0001](0001-stack-e-hospedagem.md). O item "testes de RLS com pgTAP no CI" foi substituído pelo [ADR 0003](0003-testes-e-deploy-do-banco.md) (Vitest + PGlite, mais o Postgres real no CI).
 
 ## Contexto
 
