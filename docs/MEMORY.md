@@ -4,7 +4,7 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 
 ## Estado atual
 
-- Branch `chore/fase-0-fundacao`, 10 commits. T0, T1, T3 e T4 concluídas; T2 (docs) e T6 (CI/hook) em revisão; T5 bloqueada (Docker). Ver [TASKS.md](TASKS.md).
+- Branch `chore/fase-0-fundacao`. T0, T1, T3, T4, T5 (escopo do ADR 0002) e T6 concluídas; T2 (docs) em revisão; T7 em andamento (falta a Vercel). Ver [TASKS.md](TASKS.md).
 - Publicado em 27/11: [repositório público](https://github.com/duartedaniel92/englishflix) e [PR #1](https://github.com/duartedaniel92/englishflix/pull/1) (`chore/fase-0-fundacao` → `main`), CI verde no primeiro push. A `main` só tem o commit inicial vazio até o merge do PR, que depende do ok do autor.
 
 ## Decisões
@@ -12,7 +12,8 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 | Data | Decisão | Motivo | Impacto | Fonte |
 | --- | --- | --- | --- | --- |
 | 27/11/2026 | Escopo, stack e regras do prompt mestre | Decisões fechadas pelo autor | Tudo | [PROMPT_MESTRE.md](PROMPT_MESTRE.md) |
-| 27/11/2026 | Supabase local com Docker Desktop | Migrations e testes de RLS iguais na máquina e no CI | Autor instala Docker | [ADR 0001](adr/0001-stack-e-hospedagem.md) |
+| 27/11/2026 | ~~Supabase local com Docker Desktop~~ (substituída no mesmo dia pela linha abaixo) | Migrations e testes de RLS iguais na máquina e no CI | — | [ADR 0001](adr/0001-stack-e-hospedagem.md) |
+| 27/11/2026 | Supabase: projeto remoto de dev + testes de banco no CI | A máquina tem 3,7 GB de RAM, 2 núcleos e pouco disco; Docker + Supabase local não cabem | Sem Docker local; projeto de dev e job de banco no CI na Fase 1 | [ADR 0002](adr/0002-supabase-remoto-e-testes-no-ci.md) |
 | 27/11/2026 | Commits livres na branch da fase; push, repositório e deploy só com ok | O prompt pede commits atômicos; a regra comum pede autorização | Exceção em [RULES.md](RULES.md) | Autor |
 | 27/11/2026 | Repositório público no GitHub | Portfólio; Actions ilimitado em repositório público | gitleaks obrigatório | Autor |
 | 27/11/2026 | `cacheComponents` desligado | CSP com nonce exige renderização na hora, o que anula a casca estática | Modelo clássico; cache com `revalidate` | [ADR 0001](adr/0001-stack-e-hospedagem.md) |
@@ -30,8 +31,11 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 
 - 27/11: o `winget install` falhou com `0x80080008` porque o serviço AppX do Windows travou; resolveu reiniciando. Instalados: gitleaks 8.30.1 (pasta do pacote no PATH do usuário) e Docker Desktop 4.100.1.
 - Sessões do Claude Code abertas antes de uma instalação herdam o PATH antigo: nesses casos, chamar pelo caminho completo ou abrir uma sessão nova.
+- 27/11: erro meu na descoberta. Dei o WSL2 como instalado porque o `wsl.exe` existia, mas ele é só um atalho presente em todo Windows 11; o WSL não estava instalado. Também recomendei Docker sem olhar RAM e disco. Lição: antes de propor uma pilha local pesada, medir RAM, núcleos e disco livre.
 - 27/11: histórico varrido com gitleaks (limpo); hook ativo (`npm run prepare`) e testado nos dois sentidos.
-- Ao retomar: (1) depois que o autor importar o repositório na Vercel, enviar a branch do PR para gerar o preview e checar a resposta 200 (fecha a T7); (2) `npx supabase start` e `status`, depois de abrir o Docker Desktop (fecha a T5); (3) checkpoint: o autor revisa o PR e autoriza o merge.
+- Ao retomar: (1) depois que o autor importar o repositório na Vercel (em 27/11 o projeto ainda não existia), enviar a branch do PR para gerar o preview e checar a resposta 200 (fecha a T7); (2) checkpoint: o autor revisa o PR e autoriza o merge.
+- Início da Fase 1: criar o projeto Supabase de dev e o job de banco no CI (ADR 0002).
+- Máquina de desenvolvimento: Celeron N4020 (2 núcleos), 3,7 GB de RAM, disco C: com cerca de 2 GB livres. Rodar um processo pesado por vez e evitar ferramentas que exigem Docker ou muita RAM.
 - 27/11: o conector da Vercel (MCP) recebeu 403 ao criar projeto no time `team_TJPbgfxkBJ9lqXbpyUbk8O2R`. Ele serve para consultar, mas a criação foi feita pelo painel.
 - Se o `npx ruflo` falhar com ENOENT no `package.json` de `npm-cache\_npx\<hash>`, apagar essa pasta: é um download interrompido (aconteceu quando a sessão caiu).
 - Abrir na Fase 2: ADR de CSP (nonce) e direção visual (`impeccable`).

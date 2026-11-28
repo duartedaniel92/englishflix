@@ -27,7 +27,7 @@ flowchart LR
 | --- | --- | --- | --- | --- |
 | Framework | Next.js (App Router) + TypeScript estrito | Server Components por padrão, pouco JS no cliente | Versão nova: ler `node_modules/next/dist/docs` | Implementado (Fase 0) |
 | Estilo | Tailwind CSS + shadcn/ui | Tokens centralizados em `app/globals.css` | — | Implementado (Fase 0) |
-| Banco e Auth | Supabase (Postgres, Auth, RLS) | RLS e funções SQL resolvem autorização perto do dado | Plano gratuito pausa por inatividade, sem recuperação pontual | Local na Fase 0; schema na Fase 1 |
+| Banco e Auth | Supabase (Postgres, Auth, RLS) | RLS e funções SQL resolvem autorização perto do dado | Plano gratuito pausa por inatividade, sem recuperação pontual | CLI e config na Fase 0; projeto de dev e schema na Fase 1 ([ADR 0002](adr/0002-supabase-remoto-e-testes-no-ci.md)) |
 | Validação | Zod em toda fronteira | Tipo e regra no mesmo lugar | — | Env na Fase 0 |
 | Testes | Vitest + Playwright + pgTAP (RLS) | Comportamento, não implementação | E2E só em fluxo crítico | Vitest/Playwright na Fase 0; pgTAP na Fase 1 |
 | Hospedagem | Vercel (Hobby) | Preview por PR, integração com Next | Uso não comercial | Fase 0 |
@@ -73,8 +73,9 @@ Contrato de erro único: `{ code, message }`, sem vazar detalhe interno. Listas 
 
 | Ambiente | Como | Status |
 | --- | --- | --- |
-| Local | `npm run dev` + `npx supabase start` (Docker) | Fase 0 |
+| Local | `npm run dev`, apontando para o projeto Supabase de dev ([ADR 0002](adr/0002-supabase-remoto-e-testes-no-ci.md)) | App na Fase 0; banco na Fase 1 |
 | CI | GitHub Actions: lint, tipos, testes, audit, build, E2E, gitleaks | Fase 0 |
+| CI (banco) | `supabase start` + `supabase test db` (pgTAP) no GitHub Actions | Planejado (Fase 1) |
 | Preview | Vercel, um deploy por PR | Fase 0 |
 | Produção | Vercel + projeto Supabase gratuito | Planejado |
 | Backup | `pg_dump` agendado via GitHub Action para armazenamento privado | Planejado (Fase 9) |

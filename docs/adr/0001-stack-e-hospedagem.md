@@ -1,6 +1,6 @@
 # ADR 0001 — Stack e hospedagem
 
-Status: aceito. Data: 27/11/2026.
+Status: aceito. Data: 27/11/2026. O item "Supabase local via Docker" foi substituído pelo [ADR 0002](0002-supabase-remoto-e-testes-no-ci.md).
 
 ## Contexto
 

@@ -27,13 +27,12 @@ Decisões detalhadas: [docs/adr/](docs/adr/) · limites de qualidade: [CONSTRAIN
 
 ## Como rodar
 
-Pré-requisitos: Node (versão em `.nvmrc`), Docker Desktop (para o Supabase local) e [gitleaks](https://github.com/gitleaks/gitleaks) (usado no pre-commit).
+Pré-requisitos: Node (versão em `.nvmrc`) e [gitleaks](https://github.com/gitleaks/gitleaks) (usado no pre-commit). Não precisa de Docker: o banco de desenvolvimento é um projeto Supabase na nuvem, e os testes de banco rodam no CI ([ADR 0002](docs/adr/0002-supabase-remoto-e-testes-no-ci.md)).
 
 ```bash
 npm install
-cp .env.example .env.local
-npx supabase start      # banco local (Docker)
-npm run dev             # http://localhost:3000
+cp .env.example .env.local   # preencha com as chaves do projeto Supabase de dev
+npm run dev                  # http://localhost:3000
 ```
 
 Verificações: `npm run check` (lint + tipos + testes unitários), `npm run test:e2e`, `npm run build`.
