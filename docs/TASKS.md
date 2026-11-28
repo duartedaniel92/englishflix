@@ -32,11 +32,28 @@ Esforço P/M/G não é prazo. Concluir só com evidência de aceite. Plano detal
 | T6 | CI (quality + secrets), Dependabot, pre-commit com gitleaks | M | T4 | Concluída | 27/11: histórico limpo no gitleaks 8.30.1; o hook bloqueia token falso (`github-pat`, valor `REDACTED`) e deixa passar commit limpo; CI verde no primeiro push (quality 1m09s, secrets 6s, todos os passos executados) |
 | T7 | Repositório público no GitHub, PR, preview na Vercel | P | T6 + ok do autor | Concluída | 27/11: [repositório](https://github.com/duartedaniel92/englishflix) público e [PR #1](https://github.com/duartedaniel92/englishflix/pull/1) com 4 checks verdes (qualidade, segredos, Vercel, comentários de preview). O projeto na Vercel foi importado pelo autor (o conector recebeu 403 ao criar); o preview da branch ficou pronto em 25 s e responde 200 com `lang="pt-BR"` e tema escuro |
 
+## Fase 1 — tarefas
+
+| ID | Objetivo | Esforço | Depende de | Status | Aceite e validação |
+| --- | --- | --- | --- | --- | --- |
+| F1.1 | Harness de testes de banco (Vitest + PGlite, dublê do Supabase) | M | — | Concluída | 27/11: harness testado (papel e JWT por transação); PGlite sobe em ~15 s nesta máquina |
+| F1.2 | Base: schemas, privilégios padrão revogados, `is_admin`, `profiles` e gatilho do cadastro | M | F1.1 | Concluída | 27/11: guardas gerais verdes; admin só por `app_metadata` |
+| F1.3 | Catálogo com RLS e `audit_log` | M | F1.2 | Concluída | 27/11: rascunho invisível ao aluno; escrita só do admin, auditada |
+| F1.4 | Questões e gabaritos | M | F1.3 | Concluída | 27/11: aluno vê zero linhas de gabarito e do banco da prova |
+| F1.5 | Dados do aluno com privilégio de coluna | G | F1.4 | Concluída | 27/11: A não vê B em nenhuma tabela; nota, XP e estado de temporada sem escrita direta |
+| F1.6 | Dados de referência, CI do banco, deploy pelo CI, ADRs 0003 e 0004, `CONSTRAINTS.md` | M | F1.5 | Em revisão | 27/11: guardas provados contra violação de propósito; os jobs `banco` e `deploy-banco` só rodam no GitHub |
+| F1.7 | `award_xp` e `touch_streak` | P | PR 1a | A fazer | Fuso de São Paulo nas bordas do dia |
+| F1.8 | `start_track`, `record_progress`, `submit_quiz` | M | F1.7 | A fazer | Progresso limitado pelo tempo real; conclusão exige quiz |
+| F1.9 | `start_exam`, `submit_exam`, `unlock_next_season` | G | F1.8 | A fazer | Nenhuma rota pula temporada nem lê gabarito |
+| F1.10 | `export_my_data`, `delete_my_account` | P | F1.9 | A fazer | Exporta só o próprio; apaga em cascata |
+| F1.11 | Deploy no projeto de dev e advisors sem alerta crítico | P | PR 1b + projeto em São Paulo | A fazer | `deploy-banco` verde; `get_advisors` sem ERROR |
+
 ## Bloqueios
 
 | Bloqueio | Quem resolve | Próximo passo |
 | --- | --- | --- |
 | Disco C: com 2,1 GB livres (risco para install, build e Playwright) | Autor | O Docker Desktop não é mais usado (ADR 0002) e ocupa 3,9 GB: desinstalar libera espaço |
+| Projeto Supabase em São Paulo e segredo `SUPABASE_DB_URL` (necessários antes do merge da PR 1a) | Autor | Apagar o projeto vazio de Ohio, criar o novo em South America (São Paulo) e cadastrar a URI do session pooler como segredo no GitHub |
 
 ## Evidências e histórico
 
