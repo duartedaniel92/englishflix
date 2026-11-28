@@ -157,22 +157,24 @@ begin
 end
 $$;
 
--- Mesmo tratamento para cada tabela do catálogo: updated_at automático, auditoria, RLS e escrita só do admin.
-do $$
-declare
-  t text;
+-- Regras de toda tabela de conteúdo: updated_at automático, auditoria, RLS e escrita só do admin.
+-- Usada só pelas migrations: ninguém recebe permissão de executá-la.
+create function private.protect_content_table(t regclass) returns void
+language plpgsql set search_path = ''
+as $$
 begin
-  foreach t in array array['levels', 'categories', 'seasons', 'season_categories', 'episodes', 'vocabulary'] loop
-    execute format('create trigger set_updated_at before update on public.%I for each row execute function extensions.moddatetime(updated_at)', t);
-    execute format('create trigger audit_change after insert or update or delete on public.%I for each row execute function private.audit_change()', t);
-    execute format('alter table public.%I enable row level security', t);
-    execute format('grant select, insert, update, delete on public.%I to authenticated', t);
-    execute format('create policy "admin cria" on public.%I for insert to authenticated with check ((select private.is_admin()))', t);
-    execute format('create policy "admin altera" on public.%I for update to authenticated using ((select private.is_admin())) with check ((select private.is_admin()))', t);
-    execute format('create policy "admin apaga" on public.%I for delete to authenticated using ((select private.is_admin()))', t);
-  end loop;
+  execute format('create trigger set_updated_at before update on %s for each row execute function extensions.moddatetime(updated_at)', t);
+  execute format('create trigger audit_change after insert or update or delete on %s for each row execute function private.audit_change()', t);
+  execute format('alter table %s enable row level security', t);
+  execute format('grant select, insert, update, delete on %s to authenticated', t);
+  execute format('create policy "admin cria" on %s for insert to authenticated with check ((select private.is_admin()))', t);
+  execute format('create policy "admin altera" on %s for update to authenticated using ((select private.is_admin())) with check ((select private.is_admin()))', t);
+  execute format('create policy "admin apaga" on %s for delete to authenticated using ((select private.is_admin()))', t);
 end
 $$;
+
+select private.protect_content_table(t)
+  from unnest(array['public.levels', 'public.categories', 'public.seasons', 'public.season_categories', 'public.episodes', 'public.vocabulary']::regclass[]) t;
 
 create trigger set_updated_at before update on public.audit_log
   for each row execute function extensions.moddatetime(updated_at);
