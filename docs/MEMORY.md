@@ -4,7 +4,7 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 
 ## Estado atual
 
-- Branch `chore/fase-0-fundacao`. T0, T1, T3, T4, T5 (escopo do ADR 0002) e T6 concluídas; T2 (docs) em revisão; T7 em andamento (falta a Vercel). Ver [TASKS.md](TASKS.md).
+- Branch `chore/fase-0-fundacao`. Aceite da Fase 0 cumprido (CI verde no primeiro push, preview 200). T0, T1 e T3 a T7 concluídas; T2 (docs) aguarda a leitura do autor. Ver [TASKS.md](TASKS.md).
 - Publicado em 27/11: [repositório público](https://github.com/duartedaniel92/englishflix) e [PR #1](https://github.com/duartedaniel92/englishflix/pull/1) (`chore/fase-0-fundacao` → `main`), CI verde no primeiro push. A `main` só tem o commit inicial vazio até o merge do PR, que depende do ok do autor.
 
 ## Decisões
@@ -33,7 +33,8 @@ Atualização: 27/11/2026. Status: Fase 0 (fundação) em andamento.
 - Sessões do Claude Code abertas antes de uma instalação herdam o PATH antigo: nesses casos, chamar pelo caminho completo ou abrir uma sessão nova.
 - 27/11: erro meu na descoberta. Dei o WSL2 como instalado porque o `wsl.exe` existia, mas ele é só um atalho presente em todo Windows 11; o WSL não estava instalado. Também recomendei Docker sem olhar RAM e disco. Lição: antes de propor uma pilha local pesada, medir RAM, núcleos e disco livre.
 - 27/11: histórico varrido com gitleaks (limpo); hook ativo (`npm run prepare`) e testado nos dois sentidos.
-- Ao retomar: (1) depois que o autor importar o repositório na Vercel (em 27/11 o projeto ainda não existia), enviar a branch do PR para gerar o preview e checar a resposta 200 (fecha a T7); (2) checkpoint: o autor revisa o PR e autoriza o merge.
+- Ao retomar: (1) o autor revisa o PR #1 e autoriza o merge, com merge commit (squash apagaria o histórico); (2) depois do merge, a Vercel publica a produção a partir da `main`. Conferir se a URL de produção abre sem login: a proteção do projeto está em `all_except_custom_domains`, que pode proteger até o domínio `.vercel.app` da produção. Se proteger, ajustar em Settings → Deployment Protection (decisão do autor); (3) apresentar o plano da Fase 1 e esperar o ok.
+- Vercel: projeto `englishflix` (`prj_75oI0hLlUVYmTV8cMuEae16l9CtC`) no time `team_TJPbgfxkBJ9lqXbpyUbk8O2R`, Node 26.x, região `iad1`. O conector consegue ler projeto e deploys, mas não criar projeto.
 - Início da Fase 1: criar o projeto Supabase de dev e o job de banco no CI (ADR 0002).
 - Máquina de desenvolvimento: Celeron N4020 (2 núcleos), 3,7 GB de RAM, disco C: com cerca de 2 GB livres. Rodar um processo pesado por vez e evitar ferramentas que exigem Docker ou muita RAM.
 - 27/11: o conector da Vercel (MCP) recebeu 403 ao criar projeto no time `team_TJPbgfxkBJ9lqXbpyUbk8O2R`. Ele serve para consultar, mas a criação foi feita pelo painel.
