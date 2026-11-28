@@ -1,6 +1,6 @@
 # TASKS — EnglishFlix
 
-Status: Fase 0 em andamento. Atualização: 27/11/2026.
+Status: Fase 0 concluída; Fase 1 em andamento. Atualização: 27/11/2026.
 
 Esforço P/M/G não é prazo. Concluir só com evidência de aceite. Plano detalhado de cada fase é aprovado pelo autor antes de codar (prompt mestre §11.1).
 
@@ -8,8 +8,8 @@ Esforço P/M/G não é prazo. Concluir só com evidência de aceite. Plano detal
 
 | Fase | Objetivo | Aceite | Status |
 | --- | --- | --- | --- |
-| 0 | Fundação: repositório, Next + TS estrito, Tailwind + shadcn, Supabase (CLI + config; [ADR 0002](adr/0002-supabase-remoto-e-testes-no-ci.md)), `CONSTRAINTS.md`, CI | CI verde no primeiro push e preview na Vercel | Em revisão: aceite cumprido; aguarda a revisão do autor e o merge |
-| 1 | Banco e RLS: projeto Supabase de dev, job de banco no CI, migrations, seeds B1, funções SQL, testes de RLS | Testes de RLS passando no CI, advisors sem alerta crítico | A fazer |
+| 0 | Fundação: repositório, Next + TS estrito, Tailwind + shadcn, Supabase (CLI + config; [ADR 0002](adr/0002-supabase-remoto-e-testes-no-ci.md)), `CONSTRAINTS.md`, CI | CI verde no primeiro push e preview na Vercel | Concluída: merge do PR #1 em 27/11, produção em <https://englishflix-pearl.vercel.app> |
+| 1 | Banco e RLS: esquema, RLS, dados de referência do B1, funções SQL, testes de banco, CI do banco e deploy das migrations (ADRs 0003 e 0004) | Testes de RLS passando no CI, advisors sem alerta crítico | Em andamento (PR 1a: esquema e RLS; PR 1b: funções) |
 | 2 | Auth e conta: cadastro, login, recuperação, verificação, termos, Turnstile, rate limit | E2E do cadastro até a home | A fazer |
 | 3 | Admin: níveis, categorias, temporadas, episódios (YouTube), questões, vocabulário | Publicar uma temporada completa só pelo painel | A fazer |
 | 4 | Catálogo: home com fileiras, busca, detalhe, minha lista, populares, lançamentos | Todas as listas do material original funcionando | A fazer |
@@ -25,7 +25,7 @@ Esforço P/M/G não é prazo. Concluir só com evidência de aceite. Plano detal
 | --- | --- | --- | --- | --- | --- |
 | T0 | Repositório, branch da fase, `docs/`, `.gitattributes` | P | — | Concluída | Commits `88f8626`, `1361b26` |
 | T1 | Esqueleto Next.js (TS estrito, scripts, Node fixado, placeholder PT-BR) | M | T0 | Concluída | 27/11: `lint`, `typecheck` e `build` limpos; piso do ESLint testado com violações de propósito |
-| T2 | Documentação (6 docs, `CONSTRAINTS.md`, ADR 0001, README, AGENTS/CLAUDE) | M | T0 | Em revisão | Aguarda leitura do autor |
+| T2 | Documentação (6 docs, `CONSTRAINTS.md`, ADR 0001, README, AGENTS/CLAUDE) | M | T0 | Concluída | Aprovada pelo autor com o merge do PR #1 |
 | T3 | shadcn/ui + tema escuro | P | T1 | Concluída | 27/11: `check`, build e E2E verdes; no navegador, fundo escuro, texto claro e fonte Geist aplicada em 360 px |
 | T4 | Vitest (`lib/env.ts`) + Playwright (fumaça em 360 px) | M | T1 | Concluída | 27/11: 8 testes unitários; E2E em 360 px contra o build; build falha com segredo em `NEXT_PUBLIC_*` (ambiente e `.env.local`) e passa sem ele |
 | T5 | Supabase: CLI e config versionados | P | T1 | Concluída (escopo mudou) | 27/11: CLI 3.4.0 e `supabase/config.jsonc` versionados. O Docker local não cabe nesta máquina (3,7 GB de RAM); o banco de dev vira projeto remoto e os testes de banco vão para o CI ([ADR 0002](adr/0002-supabase-remoto-e-testes-no-ci.md)), ambos na Fase 1 |
@@ -42,3 +42,5 @@ Esforço P/M/G não é prazo. Concluir só com evidência de aceite. Plano detal
 
 - 27/11/2026: plano da Fase 0 aprovado.
 - 27/11/2026: aceite da Fase 0 cumprido. CI verde no primeiro push do [PR #1](https://github.com/duartedaniel92/englishflix/pull/1) e preview da Vercel respondendo 200. Falta a revisão do autor e o merge (com merge commit, para preservar o histórico).
+- 27/11/2026: Fase 0 concluída. [PR #1](https://github.com/duartedaniel92/englishflix/pull/1) mesclado (`8a1bb06`); produção pública em <https://englishflix-pearl.vercel.app> (200 sem login). Primeiro PR do Dependabot ([#2](https://github.com/duartedaniel92/englishflix/pull/2), correções de react e tailwind) mesclado com CI verde.
+- 27/11/2026: plano da Fase 1 aprovado (região São Paulo, só a estrutura do B1, revisão da prova sem a resposta certa, deploy das migrations pelo CI).
