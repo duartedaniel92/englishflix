@@ -11,7 +11,8 @@ permissions:
 
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  # Só cancela rodadas antigas de PR; na main, um deploy de banco nunca é interrompido no meio.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   quality:
@@ -35,6 +36,25 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
 
+  banco:
+    name: Banco no Postgres do Supabase (migrations, lint e advisors)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      # Sobe só o Postgres (não a pilha inteira) e aplica as migrations do zero.
+      - run: npx supabase db start
+      - run: npx supabase db reset
+      - run: npx supabase db lint --fail-on error
+      - run: npx supabase db advisors --fail-on error
+
   secrets:
     name: Segredos (gitleaks)
     runs-on: ubuntu-latest
@@ -52,3 +72,33 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Comentar no PR exigiria permissão de escrita; o resultado já aparece no job.
           GITLEAKS_ENABLE_COMMENTS: false
+
+  deploy-banco:
+    name: Deploy do banco (projeto de dev)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [quality, banco, secrets]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: deploy-banco
+      cancel-in-progress: false
+    env:
+      # URI do session pooler: IPv4 (a conexão direta do plano gratuito é só IPv6, e o runner não tem IPv6).
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+    steps:
+      - name: Confere o segredo
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ]; then
+            echo "::error::Cadastre o segredo SUPABASE_DB_URL (URI do session pooler) no GitHub."
+            exit 1
+          fi
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx supabase db push --remote="$SUPABASE_DB_URL" --yes
+      - run: npx supabase db advisors --remote="$SUPABASE_DB_URL" --fail-on error
